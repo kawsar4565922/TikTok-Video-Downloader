@@ -488,11 +488,12 @@
       document.getElementById("videoUrl").value = "";
     }
 
-    // Fixed Copy Caption for HTTP & Mobile Keyboards
-    function copyCaption(text) {
+    // 100% Fixed Safe Copy Caption Function (Decodes Encoded URI String)
+    function copyCaption(encodedText) {
+      let text = decodeURIComponent(encodedText);
       let success = false;
 
-      // Try Legacy Textarea Method (100% Works on HTTP & Mobile Keyboards)
+      // Legacy Textarea Method (Works on HTTP & Mobile)
       let textArea = document.createElement("textarea");
       textArea.value = text;
       textArea.style.position = "fixed";
@@ -509,7 +510,7 @@
       }
       document.body.removeChild(textArea);
 
-      // Try Modern API if legacy failed
+      // Modern Clipboard API Fallback
       if (!success && navigator.clipboard) {
         navigator.clipboard.writeText(text);
         success = true;
@@ -564,6 +565,9 @@
             let hdVideoLink = res.hdplay ? res.hdplay : res.play;
             let normalVideoLink = res.play;
 
+            // Safely encode title for HTML onClick event
+            let encodedTitle = encodeURIComponent(title);
+
             // HTML Header: Author & Stats
             let cardHtml = `
               <div class="card-result">
@@ -586,7 +590,7 @@
                 <!-- Caption Box -->
                 <div class="caption-box">
                   <span class="caption-text">${title}</span>
-                  <button id="copyBtn" onclick="copyCaption(\`${title.replace(/`/g, '\\`')}\`)" class="copy-btn">📋 Copy</button>
+                  <button id="copyBtn" onclick="copyCaption('${encodedTitle}')" class="copy-btn">📋 Copy</button>
                 </div>
             `;
 
