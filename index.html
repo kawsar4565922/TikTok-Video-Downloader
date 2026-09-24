@@ -29,16 +29,16 @@
       position: relative;
     }
 
-    /* Ambient Glowing Neon Blobs for Glass Effect */
+    /* Ambient Glowing Neon Blobs */
     .background-blob-1 {
       position: absolute;
-      width: 300px;
-      height: 300px;
+      width: 350px;
+      height: 350px;
       background: linear-gradient(135deg, #ff0050, #ff007f);
       border-radius: 50%;
-      filter: blur(120px);
-      top: 10%;
-      left: 15%;
+      filter: blur(130px);
+      top: 5%;
+      left: 10%;
       z-index: 0;
       opacity: 0.45;
       animation: floatBlob 8s infinite alternate ease-in-out;
@@ -46,13 +46,13 @@
 
     .background-blob-2 {
       position: absolute;
-      width: 320px;
-      height: 320px;
+      width: 380px;
+      height: 380px;
       background: linear-gradient(135deg, #00f2fe, #4facfe);
       border-radius: 50%;
-      filter: blur(130px);
-      bottom: 10%;
-      right: 15%;
+      filter: blur(140px);
+      bottom: 5%;
+      right: 10%;
       z-index: 0;
       opacity: 0.4;
       animation: floatBlob 10s infinite alternate-reverse ease-in-out;
@@ -63,25 +63,23 @@
       100% { transform: translate(30px, -30px) scale(1.1); }
     }
 
-    /* Combined Glassmorphism + Neumorphism Container */
+    /* Combined Glassmorphism + Neumorphism Main Container */
     .container {
       position: relative;
       z-index: 1;
-      background: rgba(18, 22, 33, 0.55);
+      background: rgba(18, 22, 33, 0.65);
       backdrop-filter: blur(25px);
       -webkit-backdrop-filter: blur(25px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      padding: 40px 28px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 35px 25px;
       border-radius: 28px;
-      /* Neumorphic outer soft shadow */
       box-shadow: 
         20px 20px 50px rgba(4, 5, 8, 0.8),
         -10px -10px 40px rgba(30, 36, 54, 0.3),
         inset 0 1px 1px rgba(255, 255, 255, 0.15);
       text-align: center;
       width: 100%;
-      max-width: 420px;
-      transition: transform 0.3s ease;
+      max-width: 450px;
     }
 
     h2 {
@@ -90,51 +88,88 @@
       background: linear-gradient(135deg, #00f2fe, #ff0050);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      margin-bottom: 6px;
+      margin-bottom: 22px;
       letter-spacing: 0.5px;
     }
 
-    .subtitle {
-      font-size: 13px;
-      color: rgba(255, 255, 255, 0.5);
-      margin-bottom: 28px;
-      font-weight: 400;
-    }
-
-    .input-box {
+    /* Neumorphic Input Wrapper */
+    .input-wrapper {
       position: relative;
-      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      background: rgba(11, 13, 20, 0.8);
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 
+        inset 4px 4px 10px rgba(0, 0, 0, 0.8),
+        inset -3px -3px 8px rgba(255, 255, 255, 0.03);
+      padding: 6px;
+      margin-bottom: 20px;
     }
 
-    /* Neumorphic Inset Input Box */
     input {
       width: 100%;
-      padding: 16px 18px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 16px;
+      padding: 12px 14px;
+      border: none;
       outline: none;
-      background: rgba(11, 13, 20, 0.7);
+      background: transparent;
       color: #fff;
-      font-size: 14px;
-      /* Inner Neumorphic shadow */
-      box-shadow: 
-        inset 4px 4px 10px rgba(0, 0, 0, 0.7),
-        inset -4px -4px 10px rgba(255, 255, 255, 0.03);
-      transition: all 0.3s ease;
+      font-size: 13px;
     }
 
     input::placeholder {
       color: rgba(255, 255, 255, 0.35);
     }
 
-    input:focus {
-      border-color: rgba(0, 242, 254, 0.4);
-      box-shadow: 
-        inset 2px 2px 5px rgba(0, 0, 0, 0.8),
-        0 0 15px rgba(0, 242, 254, 0.25);
+    /* Input Action Buttons Styling */
+    .input-actions {
+      display: flex;
+      gap: 6px;
+      align-items: center;
     }
 
-    /* Main Action Button */
+    .icon-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 8px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 
+        3px 3px 8px rgba(0, 0, 0, 0.4),
+        inset 1px 1px 1px rgba(255, 255, 255, 0.1);
+    }
+
+    .paste-btn {
+      color: #00f2fe;
+    }
+
+    .paste-btn:hover {
+      background: linear-gradient(135deg, #00f2fe, #0070f3);
+      color: #000;
+      box-shadow: 0 0 12px rgba(0, 242, 254, 0.5);
+      border-color: transparent;
+    }
+
+    .clear-btn {
+      color: #ff0050;
+      font-size: 14px;
+      padding: 8px 11px;
+    }
+
+    .clear-btn:hover {
+      background: linear-gradient(135deg, #ff0050, #ff007f);
+      color: #fff;
+      box-shadow: 0 0 12px rgba(255, 0, 80, 0.5);
+      border-color: transparent;
+    }
+
+    /* Main Download Button */
     .main-btn {
       width: 100%;
       padding: 16px;
@@ -159,23 +194,23 @@
 
     .main-btn:active {
       transform: translateY(1px);
-      box-shadow: 0 5px 15px rgba(255, 0, 80, 0.2);
     }
 
     #result {
       margin-top: 25px;
     }
 
-    /* Glass + Neumorphic Result Card */
+    /* Result Card (Glass + Neumorphism) */
     .card-result {
-      background: rgba(11, 13, 20, 0.6);
-      border-radius: 20px;
-      padding: 20px;
+      background: rgba(11, 13, 20, 0.65);
+      border-radius: 22px;
+      padding: 22px;
       border: 1px solid rgba(255, 255, 255, 0.08);
       box-shadow: 
         inset 2px 2px 6px rgba(255, 255, 255, 0.03),
-        0 10px 30px rgba(0, 0, 0, 0.5);
+        0 12px 35px rgba(0, 0, 0, 0.6);
       animation: fadeIn 0.4s ease-in-out;
+      text-align: left;
     }
 
     @keyframes fadeIn {
@@ -183,43 +218,133 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
+    /* Author Profile Section */
+    .author-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 15px;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 10px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .avatar {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      border: 2px solid #00f2fe;
+      object-fit: cover;
+    }
+
+    .author-info h4 {
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .author-info p {
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 12px;
+    }
+
+    /* Stats Badge Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    .stat-badge {
+      background: rgba(0, 0, 0, 0.4);
+      padding: 8px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .stat-badge span {
+      display: block;
+      color: #00f2fe;
+      font-weight: 600;
+      font-size: 12px;
+    }
+
+    /* Cover Preview */
+    .cover-container {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
     .cover-img {
-      width: 140px;
-      height: 180px;
+      width: 130px;
+      height: 170px;
       object-fit: cover;
       border-radius: 14px;
-      margin-bottom: 14px;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
       border: 1px solid rgba(255, 255, 255, 0.12);
     }
 
-    .video-title {
-      font-size: 13px;
+    /* Caption & Copy Button */
+    .caption-box {
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 12px;
+      padding: 10px 12px;
+      margin-bottom: 15px;
+      font-size: 12px;
       color: rgba(255, 255, 255, 0.85);
-      line-height: 1.5;
-      margin-bottom: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .caption-text {
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
+      line-height: 1.4;
     }
 
-    /* Download Buttons styling */
+    .copy-btn {
+      background: rgba(0, 242, 254, 0.15);
+      border: 1px solid rgba(0, 242, 254, 0.3);
+      color: #00f2fe;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+
+    .copy-btn:hover {
+      background: #00f2fe;
+      color: #000;
+    }
+
+    /* Action Download Buttons */
     .download-btn {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
       width: 100%;
-      padding: 14px;
-      margin-top: 10px;
+      padding: 13px;
+      margin-top: 8px;
       background: linear-gradient(135deg, #7928ca, #ff0080);
       color: white;
       border: none;
-      border-radius: 14px;
+      border-radius: 12px;
       font-weight: 600;
       cursor: pointer;
-      font-size: 14px;
+      font-size: 13px;
       box-shadow: 0 8px 20px rgba(255, 0, 128, 0.25);
       transition: all 0.3s ease;
     }
@@ -234,14 +359,58 @@
       box-shadow: 0 8px 20px rgba(0, 112, 243, 0.25);
     }
 
-    .download-btn-normal:hover {
-      box-shadow: 0 12px 25px rgba(0, 223, 216, 0.4);
+    .download-btn-audio {
+      background: linear-gradient(135deg, #f59e0b, #ef4444);
+      box-shadow: 0 8px 20px rgba(245, 158, 11, 0.25);
+    }
+
+    .download-btn-cover {
+      background: linear-gradient(135deg, #10b981, #059669);
+      box-shadow: 0 8px 20px rgba(16, 185, 129, 0.25);
+    }
+
+    /* Photo Slide Gallery */
+    .slideshow-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      max-height: 250px;
+      overflow-y: auto;
+      padding-right: 5px;
+      margin-bottom: 15px;
+    }
+
+    .slide-item {
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .slide-item img {
+      width: 100%;
+      height: 110px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .slide-download-btn {
+      position: absolute;
+      bottom: 5px;
+      right: 5px;
+      background: rgba(0, 0, 0, 0.7);
+      color: #00f2fe;
+      border: none;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 10px;
+      cursor: pointer;
     }
 
     .status-msg {
       font-size: 14px;
       color: #00f2fe;
       font-weight: 500;
+      text-align: center;
     }
   </style>
 </head>
@@ -251,13 +420,17 @@
   <div class="background-blob-1"></div>
   <div class="background-blob-2"></div>
 
-  <!-- Main Dark Glassmorphism + Neumorphism Card -->
+  <!-- Main Dark Container -->
   <div class="container">
     <h2>𝐓𝐢𝐤𝐓𝐨𝐤 𝐕𝐢𝐝𝐞𝐨 𝐃𝐨𝐰𝐧𝐥𝐨𝐚𝐝𝐞𝐫</h2>
-    <p class="subtitle"></p>
 
-    <div class="input-box">
+    <!-- Input Wrapper with Stylish Clipboard & Clear Buttons -->
+    <div class="input-wrapper">
       <input type="text" id="videoUrl" placeholder="Insert TikTok link here...">
+      <div class="input-actions">
+        <button onclick="clearInput()" class="icon-btn clear-btn" title="Clear">✕</button>
+        <button onclick="pasteClipboard()" class="icon-btn paste-btn" title="Paste">📋 Paste</button>
+      </div>
     </div>
 
     <button onclick="downloadVideo()" class="main-btn">𝐃𝐨𝐰𝐧𝐥𝐨𝐚𝐝</button>
@@ -266,48 +439,185 @@
   </div>
 
   <script>
+    // Fixed Paste Clipboard for HTTP & HTTPS
+    async function pasteClipboard() {
+      let input = document.getElementById("videoUrl");
+      
+      if (navigator.clipboard && window.isSecureContext) {
+        try {
+          const text = await navigator.clipboard.readText();
+          if (text) {
+            input.value = text;
+            return;
+          }
+        } catch (err) {
+          // Fallthrough to fallback prompt
+        }
+      }
+
+      // Fallback prompt for HTTP or Permission Denied
+      let pastedText = prompt("Ekhane link ta paste kor:");
+      if (pastedText !== null && pastedText.trim() !== "") {
+        input.value = pastedText.trim();
+      }
+    }
+
+    // Clear Input
+    function clearInput() {
+      document.getElementById("videoUrl").value = "";
+    }
+
+    // Fixed Copy Caption for HTTP & Mobile Keyboards
+    function copyCaption(text) {
+      let success = false;
+
+      // Try Legacy Textarea Method (100% Works on HTTP & Mobile Keyboards)
+      let textArea = document.createElement("textarea");
+      textArea.value = text;
+      textArea.style.position = "fixed";
+      textArea.style.top = "-9999px";
+      textArea.style.left = "-9999px";
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+
+      try {
+        success = document.execCommand('copy');
+      } catch (err) {
+        success = false;
+      }
+      document.body.removeChild(textArea);
+
+      // Try Modern API if legacy failed
+      if (!success && navigator.clipboard) {
+        navigator.clipboard.writeText(text);
+        success = true;
+      }
+
+      let btn = document.getElementById("copyBtn");
+      if (btn) {
+        btn.innerText = "✅ Copied!";
+        setTimeout(() => { btn.innerText = "📋 Copy"; }, 2000);
+      }
+    }
+
+    // Format Large Numbers
+    function formatNum(num) {
+      if (!num) return '0';
+      if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
+      if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
+      return num;
+    }
+
+    // Main Fetch Function
     function downloadVideo() {
       let url = document.getElementById("videoUrl").value.trim();
       let resultDiv = document.getElementById("result");
 
       if (!url) {
-        alert("Please fill out this field.");
+        alert("Please paste a TikTok link first!");
         return;
       }
 
       resultDiv.innerHTML = "<p class='status-msg'>⏳ 𝐕𝐢𝐝𝐞𝐨 𝐏𝐫𝐨𝐜𝐞𝐬𝐬𝐢𝐧𝐠...</p>";
 
-      // TikWM free API call
+      // Fetching TikWM API
       fetch(`https://www.tikwm.com/api/?url=${encodeURIComponent(url)}`)
         .then(response => response.json())
         .then(data => {
           if (data.code === 0) {
-            let hdVideoLink = data.data.hdplay ? data.data.hdplay : data.data.play; 
-            let normalVideoLink = data.data.play;
-            let title = data.data.title || "TikTok Video";
-            let cover = data.data.cover;
+            let res = data.data;
+            
+            // Extract Info
+            let title = res.title || "TikTok Video";
+            let cover = res.cover;
+            let authorName = res.author?.nickname || "TikTok Creator";
+            let authorId = res.author?.unique_id ? `@${res.author.unique_id}` : "";
+            let authorAvatar = res.author?.avatar || cover;
 
-            resultDiv.innerHTML = `
+            let views = formatNum(res.play_count);
+            let likes = formatNum(res.digg_count);
+            let comments = formatNum(res.comment_count);
+
+            let audioLink = res.music || res.music_info?.play;
+            let hdVideoLink = res.hdplay ? res.hdplay : res.play;
+            let normalVideoLink = res.play;
+
+            // HTML Header: Author & Stats
+            let cardHtml = `
               <div class="card-result">
-                <img src="${cover}" class="cover-img" alt="Thumbnail">
-                <p class="video-title"><b>${title}</b></p>
-                <button onclick="saveFile('${hdVideoLink}', 'tiktok_hd.mp4', this)" class="download-btn">🔥 𝐅𝐮𝐥𝐥 𝐇𝐃 𝐃𝐨𝐰𝐧𝐥𝐨𝐚𝐝</button>
-                <button onclick="saveFile('${normalVideoLink}', 'tiktok_normal.mp4', this)" class="download-btn download-btn-normal">⚡ 𝐍𝐨𝐫𝐦𝐚𝐥 𝐐𝐮𝐚𝐥𝐢𝐭𝐲 𝐃𝐨𝐰𝐧𝐥𝐨𝐚𝐝</button>
-              </div>
+                <!-- Author Header -->
+                <div class="author-card">
+                  <img src="${authorAvatar}" class="avatar" alt="Avatar">
+                  <div class="author-info">
+                    <h4>${authorName}</h4>
+                    <p>${authorId}</p>
+                  </div>
+                </div>
+
+                <!-- Stats Badge -->
+                <div class="stats-grid">
+                  <div class="stat-badge">👁️ Views<span>${views}</span></div>
+                  <div class="stat-badge">❤️ Likes<span>${likes}</span></div>
+                  <div class="stat-badge">💬 Comments<span>${comments}</span></div>
+                </div>
+
+                <!-- Caption Box -->
+                <div class="caption-box">
+                  <span class="caption-text">${title}</span>
+                  <button id="copyBtn" onclick="copyCaption(\`${title.replace(/`/g, '\\`')}\`)" class="copy-btn">📋 Copy</button>
+                </div>
             `;
+
+            // Check if post is Photo Slideshow or Video
+            if (res.images && res.images.length > 0) {
+              // Slideshow Render
+              cardHtml += `<div class="slideshow-grid">`;
+              res.images.forEach((imgUrl, index) => {
+                cardHtml += `
+                  <div class="slide-item">
+                    <img src="${imgUrl}" alt="Slide ${index+1}">
+                    <button onclick="saveFile('${imgUrl}', 'tiktok_slide_${index+1}.jpg', this)" class="slide-download-btn">⬇️ Save</button>
+                  </div>
+                `;
+              });
+              cardHtml += `</div>`;
+            } else {
+              // Video Render
+              cardHtml += `
+                <div class="cover-container">
+                  <img src="${cover}" class="cover-img" alt="Thumbnail">
+                </div>
+                <button onclick="saveFile('${hdVideoLink}', 'tiktok_hd.mp4', this)" class="download-btn">🔥 𝐅𝐮𝐥𝐥 𝐇𝐃 𝐕𝐢𝐝𝐞𝐨</button>
+                <button onclick="saveFile('${normalVideoLink}', 'tiktok_normal.mp4', this)" class="download-btn download-btn-normal">⚡ 𝐍𝐨𝐫𝐦𝐚𝐥 𝐐𝐮𝐚𝐥𝐢𝐭𝐲</button>
+              `;
+            }
+
+            // MP3 Audio & Cover Download Option
+            if (audioLink) {
+              cardHtml += `<button onclick="saveFile('${audioLink}', 'tiktok_audio.mp3', this)" class="download-btn download-btn-audio">🎵 𝐃𝐨𝐰𝐧𝐥𝐨𝐚𝐝 𝐌𝐏𝟑 𝐀𝐮𝐝𝐢𝐨</button>`;
+            }
+
+            if (cover) {
+              cardHtml += `<button onclick="saveFile('${cover}', 'tiktok_cover.jpg', this)" class="download-btn download-btn-cover">🖼️ 𝐃𝐨𝐰𝐧𝐥𝐨𝐚𝐝 𝐂𝐨𝐯𝐞𝐫 𝐈𝐦𝐚𝐠𝐞</button>`;
+            }
+
+            cardHtml += `</div>`;
+            resultDiv.innerHTML = cardHtml;
+
           } else {
-            resultDiv.innerHTML = "<p style='color:#ff4757; font-size:14px;'>❌ Video খুঁজে পাওয়া যায়নি বা লিংক ভুল!</p>";
+            resultDiv.innerHTML = "<p style='color:#ff4757; font-size:14px; text-align:center;'>❌ Video খুঁজে পাওয়া যায়নি বা লিংক ভুল!</p>";
           }
         })
         .catch(error => {
-          resultDiv.innerHTML = "<p style='color:#ff4757; font-size:14px;'>❌ কোনো সমস্যা হয়েছে, নেট চেক করে আবার চেষ্টা কর!</p>";
+          resultDiv.innerHTML = "<p style='color:#ff4757; font-size:14px; text-align:center;'>❌ কোনো সমস্যা হয়েছে, নেট চেক করে আবার চেষ্টা কর!</p>";
         });
     }
 
-    // Direct download handler
+    // Direct Download Handler (Fetch -> Blob)
     async function saveFile(fileUrl, fileName, btnElement) {
       let originalText = btnElement.innerText;
-      btnElement.innerText = "⏳ 𝐃𝐨𝐰𝐧𝐥𝐨𝐚𝐝 𝐏𝐫𝐨𝐜𝐞𝐬𝐬𝐢𝐧𝐠...";
+      btnElement.innerText = "⏳ 𝐃𝐨𝐰𝐧𝐥𝐨𝐚𝐝𝐢𝐧𝐠...";
       btnElement.disabled = true;
 
       try {
@@ -323,7 +633,7 @@
         document.body.removeChild(a);
         URL.revokeObjectURL(blobUrl);
 
-        btnElement.innerText = "✅ ​𝐃𝐨𝐰𝐧𝐥𝐨𝐚𝐝 𝐂𝐨𝐦𝐩𝐥𝐞𝐭𝐞!";
+        btnElement.innerText = "✅ 𝐂𝐨𝐦𝐩𝐥𝐞𝐭𝐞!";
         setTimeout(() => {
           btnElement.innerText = originalText;
           btnElement.disabled = false;
