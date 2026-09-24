@@ -371,11 +371,6 @@
       box-shadow: 0 12px 25px rgba(255, 0, 128, 0.4);
     }
 
-    .download-btn-normal {
-      background: linear-gradient(135deg, #0070f3, #00dfd8);
-      box-shadow: 0 8px 20px rgba(0, 112, 243, 0.25);
-    }
-
     .download-btn-audio {
       background: linear-gradient(135deg, #f59e0b, #ef4444);
       box-shadow: 0 8px 20px rgba(245, 158, 11, 0.25);
@@ -563,7 +558,6 @@
 
             let audioLink = res.music || res.music_info?.play;
             let hdVideoLink = res.hdplay ? res.hdplay : res.play;
-            let normalVideoLink = res.play;
 
             // Safely encode title for HTML onClick event
             let encodedTitle = encodeURIComponent(title);
@@ -614,7 +608,6 @@
                   <img src="${cover}" class="cover-img" alt="Thumbnail">
                 </div>
                 <button onclick="saveFile('${hdVideoLink}', 'tiktok_hd.mp4', this)" class="download-btn">🔥 𝐅𝐮𝐥𝐥 𝐇𝐃 𝐕𝐢𝐝𝐞𝐨</button>
-                <button onclick="saveFile('${normalVideoLink}', 'tiktok_normal.mp4', this)" class="download-btn download-btn-normal">⚡ 𝐍𝐨𝐫𝐦𝐚𝐥 𝐐𝐮𝐚𝐥𝐢𝐭𝐲</button>
               `;
             }
 
