@@ -67,16 +67,16 @@
       100% { transform: translate(30px, -30px) scale(1.1); }
     }
 
-    /* Toast Notification Container */
+    /* Toast Notification Container (Compact & Optimized) */
     #toast-container {
       position: fixed;
-      top: 20px;
+      top: 15px;
       left: 50%;
       transform: translateX(-50%);
       z-index: 9999;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 6px;
       pointer-events: none;
     }
 
@@ -86,18 +86,19 @@
       -webkit-backdrop-filter: blur(15px);
       border: 1px solid rgba(255, 255, 255, 0.15);
       color: #fff;
-      padding: 12px 22px;
-      border-radius: 14px;
-      font-size: 13px;
+      padding: 8px 14px;
+      border-radius: 10px;
+      font-size: 11px;
       font-weight: 500;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
       opacity: 0;
-      transform: translateY(-20px) scale(0.95);
-      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transform: translateY(-15px) scale(0.95);
+      transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       pointer-events: auto;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
+      white-space: nowrap;
     }
 
     .toast.show {
@@ -496,7 +497,7 @@
       background: rgba(255, 255, 255, 0.95);
       color: #1e293b;
       border-color: rgba(0, 0, 0, 0.1);
-      box-shadow: 0 10px 30px rgba(163, 177, 198, 0.4);
+      box-shadow: 0 5px 20px rgba(163, 177, 198, 0.4);
     }
     body.light-mode .toast.welcome { background: rgba(240, 244, 255, 0.95); color: #7928ca; }
     body.light-mode .container {
@@ -588,7 +589,7 @@
   </div>
 
   <script>
-    // AI Voice Greeting on First User Interaction
+    // Custom Audio Greeting on First User Interaction
     let hasWelcomed = false;
     
     document.body.addEventListener("click", () => {
@@ -600,37 +601,33 @@
     }, { once: true });
 
     function playWelcomeVoice() {
-      if ('speechSynthesis' in window) {
-        let message = new SpeechSynthesisUtterance("hey! Welcome! You are using TikTok Video Downloader Pro, designed and developed by Kawsar.");
-        message.rate = 0.95; // Speech speed
-        message.pitch = 1.1; // Pleasant AI pitch
-        message.volume = 1.0;
-
-        let voices = window.speechSynthesis.getVoices();
-        let enVoice = voices.find(v => v.lang.includes('en') && (v.name.includes('Google') || v.name.includes('Natural') || v.name.includes('Female')));
-        if (enVoice) {
-          message.voice = enVoice;
-        }
-
-        window.speechSynthesis.speak(message);
-      }
+      let welcomeAudio = new Audio('welcome.mp3');
+      welcomeAudio.volume = 1.0;
+      welcomeAudio.play().catch(error => {
+        console.log("Audio play error:", error);
+      });
     }
 
-    // Toast Notification System
+    // Optimized Toast Notification System (Single Queue / Replacement & Shorter Duration)
     function showToast(message, type = 'success') {
       let container = document.getElementById("toast-container");
+      
+      // Remove previous toast instantly if exists (Queue/Replacement logic)
+      container.innerHTML = "";
+
       let toast = document.createElement("div");
       toast.className = `toast ${type}`;
       let icon = type === 'success' ? '✅' : type === 'error' ? '❌' : '🤖';
       toast.innerHTML = `${icon} ${message}`;
       
       container.appendChild(toast);
-      setTimeout(() => toast.classList.add("show"), 50);
+      setTimeout(() => toast.classList.add("show"), 20);
 
+      // Disappears quickly after 1.5 seconds (User sees it instantly and it goes away)
       setTimeout(() => {
         toast.classList.remove("show");
-        setTimeout(() => toast.remove(), 300);
-      }, 3500);
+        setTimeout(() => toast.remove(), 250);
+      }, 1500);
     }
 
     // Theme Switcher Logic
@@ -699,7 +696,7 @@
       let btn = document.getElementById("copyBtn");
       if (btn) {
         btn.innerText = "✅ Copied!";
-        showToast("Caption copied to clipboard!");
+        showToast("Caption copied!");
         setTimeout(() => { btn.innerText = "📋 Copy"; }, 2000);
       }
     }
@@ -717,7 +714,7 @@
       let resultDiv = document.getElementById("result");
 
       if (!url) {
-        showToast("Please paste a TikTok link first!", "error");
+        showToast("Please paste a link first!", "error");
         return;
       }
 
@@ -805,15 +802,15 @@
 
             cardHtml += `</div>`;
             resultDiv.innerHTML = cardHtml;
-            showToast("Video fetched successfully!");
+            showToast("Fetched successfully!");
 
           } else {
-            showToast("Video not found or invalid link!", "error");
+            showToast("Invalid link or not found!", "error");
             resultDiv.innerHTML = "<p style='color:#ff4757; font-size:14px; text-align:center;'>❌ Video খুঁজে পাওয়া যায়নি বা লিংক ভুল!</p>";
           }
         })
         .catch(error => {
-          showToast("Network error occurred!", "error");
+          showToast("Network error!", "error");
           resultDiv.innerHTML = "<p style='color:#ff4757; font-size:14px; text-align:center;'>❌ কোনো সমস্যা হয়েছে, নেট চেক করে আবার চেষ্টা কর!</p>";
         });
     }
@@ -823,7 +820,7 @@
       let originalText = btnElement.innerText;
       btnElement.innerText = "⏳ 𝐃𝐨𝐰𝐧𝐥𝐨𝐚𝐝𝐢𝐧𝐠...";
       btnElement.disabled = true;
-      showToast(`Starting download: ${fileName}`);
+      showToast(`Starting download...`);
 
       try {
         let response = await fetch(fileUrl);
@@ -839,7 +836,7 @@
         URL.revokeObjectURL(blobUrl);
 
         btnElement.innerText = "✅ 𝐂𝐨𝐦𝐩𝐥𝐞𝐭𝐞!";
-        showToast("Download completed successfully!");
+        showToast("Download completed!");
         setTimeout(() => {
           btnElement.innerText = originalText;
           btnElement.disabled = false;
@@ -848,7 +845,7 @@
         window.open(fileUrl, "_blank");
         btnElement.innerText = originalText;
         btnElement.disabled = false;
-        showToast("Opening link in new tab...", "success");
+        showToast("Opening in new tab...", "success");
       }
     }
   </script>
