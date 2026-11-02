@@ -588,20 +588,20 @@
   </div>
 
   <script>
-    // AI Voice Greeting on First User Interaction (Bypasses Browser Autoplay Block)
+    // AI Voice Greeting on First User Interaction
     let hasWelcomed = false;
     
     document.body.addEventListener("click", () => {
       if (!hasWelcomed) {
         playWelcomeVoice();
-        showToast("Welcome to TikTok Downloader Pro!", "welcome");
+        showToast("Welcome by Developer Kawsar!", "welcome");
         hasWelcomed = true;
       }
     }, { once: true });
 
     function playWelcomeVoice() {
       if ('speechSynthesis' in window) {
-        let message = new SpeechSynthesisUtterance("Welcome to TikTok Video Downloader Pro");
+        let message = new SpeechSynthesisUtterance("Welcome! You are using TikTok Video Downloader Pro, designed and developed by Kawsar.");
         message.rate = 0.95; // Speech speed
         message.pitch = 1.1; // Pleasant AI pitch
         message.volume = 1.0;
