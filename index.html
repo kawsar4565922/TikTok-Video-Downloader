@@ -107,6 +107,7 @@
 
     .toast.success { border-color: #00f2fe; color: #00f2fe; }
     .toast.error { border-color: #ff0050; color: #ff0050; }
+    .toast.welcome { border-color: #7928ca; color: #ff0080; background: rgba(25, 18, 35, 0.95); }
 
     /* Header Top Section */
     .header-top {
@@ -242,9 +243,7 @@
         inset 1px 1px 1px rgba(255, 255, 255, 0.1);
     }
 
-    .icon-btn:active {
-      transform: scale(0.92);
-    }
+    .icon-btn:active { transform: scale(0.92); }
 
     .paste-btn { color: #00f2fe; }
     .paste-btn:hover {
@@ -262,7 +261,7 @@
       border-color: transparent;
     }
 
-    /* Main Download Button Micro-Interactions */
+    /* Main Download Button */
     .main-btn {
       width: 100%;
       padding: 16px;
@@ -291,7 +290,7 @@
 
     #result { margin-top: 25px; }
 
-    /* Real-Time Shimmer Skeleton Loader */
+    /* Shimmer Skeleton Loader */
     .skeleton-card {
       background: rgba(11, 13, 20, 0.65);
       border-radius: 22px;
@@ -492,17 +491,14 @@
     .slide-download-btn:active { transform: scale(0.92); }
 
     /* Light Glass Mode Styles */
-    body.light-mode {
-      background-color: #eef2f7;
-    }
-
+    body.light-mode { background-color: #eef2f7; }
     body.light-mode .toast {
       background: rgba(255, 255, 255, 0.95);
       color: #1e293b;
       border-color: rgba(0, 0, 0, 0.1);
       box-shadow: 0 10px 30px rgba(163, 177, 198, 0.4);
     }
-
+    body.light-mode .toast.welcome { background: rgba(240, 244, 255, 0.95); color: #7928ca; }
     body.light-mode .container {
       background: rgba(255, 255, 255, 0.75);
       border: 1px solid rgba(255, 255, 255, 0.9);
@@ -511,7 +507,6 @@
         -10px -10px 40px rgba(255, 255, 255, 0.8),
         inset 0 1px 1px rgba(255, 255, 255, 0.9);
     }
-
     body.light-mode .dev-badge,
     body.light-mode .theme-btn {
       background: rgba(255, 255, 255, 0.8);
@@ -519,9 +514,7 @@
       color: #0070f3;
       box-shadow: 0 8px 20px rgba(163, 177, 198, 0.3);
     }
-
     body.light-mode .theme-btn { color: #333; }
-
     body.light-mode .input-wrapper {
       background: rgba(238, 242, 247, 0.9);
       border: 1px solid rgba(255, 255, 255, 0.6);
@@ -529,37 +522,30 @@
         inset 4px 4px 10px rgba(163, 177, 198, 0.4),
         inset -3px -3px 8px rgba(255, 255, 255, 0.9);
     }
-
     body.light-mode input { color: #1e293b; }
     body.light-mode input::placeholder { color: rgba(0, 0, 0, 0.4); }
-
     body.light-mode .icon-btn {
       background: rgba(255, 255, 255, 0.8);
       border: 1px solid rgba(163, 177, 198, 0.3);
       box-shadow: 3px 3px 8px rgba(163, 177, 198, 0.3);
     }
-
     body.light-mode .card-result,
     body.light-mode .skeleton-card {
       background: rgba(240, 244, 248, 0.8);
       border: 1px solid rgba(255, 255, 255, 0.8);
       box-shadow: inset 2px 2px 6px rgba(255, 255, 255, 0.8), 0 12px 35px rgba(163, 177, 198, 0.4);
     }
-
     body.light-mode .author-card {
       background: rgba(255, 255, 255, 0.5);
       border-color: rgba(163, 177, 198, 0.2);
     }
-
     body.light-mode .author-info h4 { color: #1e293b; }
     body.light-mode .author-info p { color: rgba(0, 0, 0, 0.5); }
-
     body.light-mode .stat-badge {
       background: rgba(255, 255, 255, 0.6);
       border-color: rgba(163, 177, 198, 0.2);
       color: #333;
     }
-
     body.light-mode .stat-badge span { color: #0070f3; }
     body.light-mode .caption-box { background: rgba(255, 255, 255, 0.5); color: #1e293b; }
     body.light-mode .skeleton-line { background: rgba(163, 177, 198, 0.3); }
@@ -602,12 +588,41 @@
   </div>
 
   <script>
-    // 1. Toast Notification System
+    // AI Voice Greeting on First User Interaction (Bypasses Browser Autoplay Block)
+    let hasWelcomed = false;
+    
+    document.body.addEventListener("click", () => {
+      if (!hasWelcomed) {
+        playWelcomeVoice();
+        showToast("Welcome to TikTok Downloader Pro!", "welcome");
+        hasWelcomed = true;
+      }
+    }, { once: true });
+
+    function playWelcomeVoice() {
+      if ('speechSynthesis' in window) {
+        let message = new SpeechSynthesisUtterance("Welcome to TikTok Video Downloader Pro");
+        message.rate = 0.95; // Speech speed
+        message.pitch = 1.1; // Pleasant AI pitch
+        message.volume = 1.0;
+
+        let voices = window.speechSynthesis.getVoices();
+        let enVoice = voices.find(v => v.lang.includes('en') && (v.name.includes('Google') || v.name.includes('Natural') || v.name.includes('Female')));
+        if (enVoice) {
+          message.voice = enVoice;
+        }
+
+        window.speechSynthesis.speak(message);
+      }
+    }
+
+    // Toast Notification System
     function showToast(message, type = 'success') {
       let container = document.getElementById("toast-container");
       let toast = document.createElement("div");
       toast.className = `toast ${type}`;
-      toast.innerHTML = type === 'success' ? `✅ ${message}` : `❌ ${message}`;
+      let icon = type === 'success' ? '✅' : type === 'error' ? '❌' : '🤖';
+      toast.innerHTML = `${icon} ${message}`;
       
       container.appendChild(toast);
       setTimeout(() => toast.classList.add("show"), 50);
@@ -615,7 +630,7 @@
       setTimeout(() => {
         toast.classList.remove("show");
         setTimeout(() => toast.remove(), 300);
-      }, 3000);
+      }, 3500);
     }
 
     // Theme Switcher Logic
@@ -706,7 +721,7 @@
         return;
       }
 
-      // 2. Real-time Shimmer Skeleton UI Animation
+      // Shimmer Skeleton UI Animation
       resultDiv.innerHTML = `
         <div class="skeleton-card">
           <div class="skeleton-line" style="width: 50%; height: 18px;"></div>
@@ -727,8 +742,6 @@
             let cover = res.cover;
             let authorName = res.author?.nickname || "TikTok Creator";
             let authorId = res.author?.unique_id ? `@${res.author.unique_id}` : "@tiktok_user";
-            
-            // 3. Dynamic Creator Filename Generation
             let cleanAuthorTag = authorId.replace('@', '');
             let authorAvatar = res.author?.avatar || cover;
 
